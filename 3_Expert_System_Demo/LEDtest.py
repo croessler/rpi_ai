@@ -6,8 +6,8 @@ from pyswip import Functor, Variable, Query, call
 
 # Setup GPIO pins
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(4, GPIO.output)
-GPIO.setup(17, GPIO.output)
+GPIO.setup(4, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
 
 # Setup Python like functions for Prolog statements
 assertz = Functor("assertz", 1)
@@ -21,14 +21,12 @@ call(assertz(father("michael", "gina")))
 X = Variable()
 q = Query(father("michael",X))
 while q.nextSolution():
-    print "Hello, ", X.value
-    if str(X.value) == "john": # LED #4 on if john is michael's
-    child
+    print("Hello, ", X.value)
+    if str(X.value) == "john": # LED #4 on if john is michael's child
         GPIO.output(4,GPIO.HIGH)
         time.sleep(5)
         GPIO.output(4,GPIO.LOW)
-    if str(X.value) == "gina": # LED #17 on if gina is
-    michael's child
+    if str(X.value) == "gina": # LED #17 on if gina is michael's child
         GPIO.output(17,GPIO.HIGH)
         time.sleep(5)
         GPIO.output(17,GPIO.LOW)
